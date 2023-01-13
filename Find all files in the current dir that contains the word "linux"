@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+#Find all the files in the current directory that contains the word "linux"
+Files_to_delete=$(grep -rl "linux" .)
+
+#Confirm that the user wants to delete the files
+echo "The following files will be deleted"
+echo $Files_to_delete
+echo "Are you sure you want to delete these files? [y/n]"
+read confirm
+
+#If the user confirm, delete the files
+if [ "$confirm" == "y" ]; then
+  rm $Files_to_delete
+  echo "Files have been deleted"
+else
+  echo "Delete operation has been cancelled"
+fi
