@@ -1,0 +1,20 @@
+### File backup: A script that creates a backup of important files and directories on your system, and saves them to a remote location. This can be done using rsync command, which can copy files and directories, and also can do it incrementally.
+
+#!/usr/bin/bash
+
+# Define the directories to backup
+directories=(/etc /home /var/www)
+
+# Define the remote location
+remote_user="backup user"
+remote_host="badkupserver.com"
+remote_path="path/to/backup"
+
+# Perform the backup
+for directory in "${directories[@]}"
+do 
+  rsync -avz --delete "$directory" "$remote_user@$remote_host:$remote_path"
+done
+
+# Print conformation
+echo "Backup completed"
