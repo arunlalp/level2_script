@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+# Define the database name and backup file name
+databasename=mydatabase
+backupfile=mydatabase_%(date +%Y%m%d).sql
+
+# Create a backup of the database
+mysqldump -u root -p $databasename > $backupfile
+
+# Copy the backup to a remote location
+scp $backupfile user@remotehost:/path/to/backup
+
+# Remove the local copy of the backup
+rm $backupfile
+
+# Print confirmation
+echo "database backup is created and transfered to remote location"
