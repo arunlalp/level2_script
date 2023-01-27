@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# set the threshold for memory usage in percentage
+threshold=90
+
+# get the current memory usage
+memory_usage=`free | grep Mem | awk '{print $3/$2 * 100.0}'`
+
+# check if the usage exceeds the threshold
+if (( $(echo "$memory_usage > $threshold" | bc -l) )); then
+    # send an alert
+    echo "Memory usage exceeded threshold: $memory_usage" | mail -s "High Memory Usage Alert" admin@example.com
+fi
